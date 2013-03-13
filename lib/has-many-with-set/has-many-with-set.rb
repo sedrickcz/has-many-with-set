@@ -21,7 +21,7 @@ module HasManyWithSet
     child_klass                     = Object.const_get(class_name)
 
     Relationships.create_set_model(set_model_name)
-    Relationships.relate_child_to_set(set_model_name, class_name)
+    Relationships.relate_child_to_set(set_model_name, child_model_name, class_name)
     Relationships.relate_parent_to_set(set_model_name, parent_model_name)
 
     # Parent methods

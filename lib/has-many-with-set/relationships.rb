@@ -5,10 +5,10 @@ module HasManyWithSet
         Object.const_defined?(set_model_name) # this *should* never happen...
     end
 
-    def self.relate_child_to_set (set_model_name, child_model_name)
+    def self.relate_child_to_set (set_model_name, child_model_name, class_name)
       # Take the child model and add a regular many-to-many relationship to the Set model...
-      Object.const_get(child_model_name).class_eval do
-        has_and_belongs_to_many set_model_name.tableize.to_sym, :join_table => "#{ set_model_name.tableize }_#{ child_model_name.tableize }"
+      Object.const_get(class_name).class_eval do
+        has_and_belongs_to_many set_model_name.tableize.to_sym, :class_name => class_name, :join_table => "#{ set_model_name.tableize }_#{ child_model_name.tableize }"
       end
 
       # ... and take the Set model and finish the many-to-many relationship.
