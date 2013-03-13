@@ -19,7 +19,7 @@ module HasManyWithSet
 
     def self.relate_parent_to_set (set_model_name, parent_model_name)
       # The parent object has a FK to the Set table, so it belongs_to it.
-      Object.const_get(parent_model_name).class_eval do
+      Object.const_get(parent_class_name).class_eval do
         belongs_to set_model_name.tableize.singularize.to_sym
       end
     end
