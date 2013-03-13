@@ -1,12 +1,12 @@
 module HasManyWithSet
   # This is the magic entry point method that adds set relationships to a model.
   def has_many_with_set (child, class_name)
-    build_set_relationship self.to_s, class_name.to_s
+    build_set_relationship self.to_s, child.to_s.classify, class_name.to_s
   end
 
   private
 
-  def build_set_relationship (parent_model_name, child_model_name)
+  def build_set_relationship (parent_model_name, child_model_name, class_name)
     parent_table_name               = parent_model_name.tableize
     child_table_name                = child_model_name.tableize
     set_table_name                  = "#{ parent_table_name }_#{ child_table_name }_sets"
@@ -18,7 +18,7 @@ module HasManyWithSet
     loader_method_name              = "#{ set_items_table_name }_loader"
     parent_loader_method_name       = "#{ parent_table_name }_loader"
     save_callback_method_name       = "#{ set_items_table_name }_save_callback"
-    child_klass                     = Object.const_get(child_model_name)
+    child_klass                     = Object.const_get(class_name)
 
     Relationships.create_set_model(set_model_name)
     Relationships.relate_child_to_set(set_model_name, child_model_name)
