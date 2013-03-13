@@ -14,7 +14,7 @@ module HasManyWithSet
     set_items_table_name            = "#{ set_table_name }_#{ child_table_name }"
     instance_var_name               = "@#{ child_table_name }"
     child_instance_var_name         = "@#{ parent_table_name }"
-    setter_method_name              = "#{ child_table_name }="
+    setter_method_name              = "refinery_#{ child_table_name }="
     loader_method_name              = "#{ set_items_table_name }_loader"
     parent_loader_method_name       = "#{ parent_table_name }_loader"
     save_callback_method_name       = "#{ set_items_table_name }_save_callback"
@@ -36,7 +36,7 @@ module HasManyWithSet
 
     define_method(save_callback_method_name,
                   Callbacks.build_saver_callback(set_table_name, set_items_table_name,
-                                                 child_table_name, instance_var_name))
+                                                 child_table_name, instance_var_name, parent_class_name, class_name))
 
     # Child methods
     child_klass.send(:define_method, parent_loader_method_name,
