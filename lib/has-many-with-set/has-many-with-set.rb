@@ -41,7 +41,7 @@ module HasManyWithSet
     # Child methods
     child_klass.send(:define_method, parent_loader_method_name,
                      Accessors.build_parent_loader_method(parent_table_name, child_table_name,
-                                                          set_table_name, set_items_table_name))
+                                                          set_table_name, set_items_table_name, parent_class_name))
 
     child_klass.send(:define_method, parent_table_name,
                      Accessors.build_getter_method(child_instance_var_name, parent_loader_method_name))

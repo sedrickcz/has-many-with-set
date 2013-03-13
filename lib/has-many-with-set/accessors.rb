@@ -42,10 +42,10 @@ module HasManyWithSet
       }
     end
 
-    def self.build_parent_loader_method (parent_table_name, child_table_name, set_table_name, set_items_table_name)
+    def self.build_parent_loader_method (parent_table_name, child_table_name, set_table_name, set_items_table_name, parent_class_name)
       find_query = Queries.build_find_parents_query(parent_table_name, child_table_name, set_table_name, set_items_table_name)
 
-      parent_klass = Object.const_get(parent_table_name.classify)
+      parent_klass = Object.const_get(parent_class_name)
 
       Proc.new {
         values = []
