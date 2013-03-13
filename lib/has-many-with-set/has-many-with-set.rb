@@ -1,7 +1,7 @@
 module HasManyWithSet
   # This is the magic entry point method that adds set relationships to a model.
   def has_many_with_set (child, class_name)
-    build_set_relationship self.to_s, child.to_s.classify, class_name.to_s
+    build_set_relationship self.to_s.split("::").last, child.to_s.classify, class_name.to_s
   end
 
   private
